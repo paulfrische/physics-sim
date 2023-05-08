@@ -28,7 +28,7 @@ class VerletObject:
 
     @property
     def speed(self):
-        return (self.position - self.position_old)
+        return (self.position - self.position_old).length
 
     def update(self, dt: float):
         velocity = self.position - self.position_old
@@ -39,3 +39,18 @@ class VerletObject:
 
     def accelerate(self, acceleration):
         self.acceleration += acceleration
+
+
+def construct_verlet_object(position: Vector2, gravity: Vector2, radius: int, acceleration: Vector2 = None) -> VerletObject:
+    """A factory function to construct a VerletObject instance
+
+    Args:
+        position: initial position
+        gravity: gravity vector 
+        radius: radius of the circle
+
+    Returns:
+        VerletObject
+    """
+    properties = PhysicsProperties(radius, gravity)
+    return VerletObject(properties, position, position, acceleration or Vector2(0.0, 0.0), 0.0)
