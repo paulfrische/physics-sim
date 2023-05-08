@@ -12,6 +12,10 @@ class Vector2:
     def length(self) -> float:
         return math.sqrt(self.x * self.x + self.y * self.y)
 
+    @property
+    def normal(self) -> Self:
+        return self / self.length
+
     def __add__(self, other: Self | float) -> Self:
         if isinstance(other, float) or isinstance(other, int):
             other = Vector2(other, other)
